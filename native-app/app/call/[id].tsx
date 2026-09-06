@@ -280,7 +280,7 @@ export default function CallScreen() {
         ) : (
           contactAvatar
             ? <ImageBackground source={{ uri: contactAvatar }} style={StyleSheet.absoluteFillObject} blurRadius={Platform.OS === 'web' ? 20 : 50} />
-            : <LinearGradient colors={['#0f172a', '#1e3a8a', '#4c1d95']} start={{x:0, y:0}} end={{x:1, y:1}} style={StyleSheet.absoluteFillObject} />
+            : <LinearGradient colors={TOKENS.GRADIENTS.PRIMARY_DARK} start={{x:0, y:0}} end={{x:1, y:1}} style={StyleSheet.absoluteFillObject} />
         )}
       </View>
 
@@ -295,8 +295,8 @@ export default function CallScreen() {
           </ScaleButton>
           <YStack alignItems="center">
             <View style={styles.encryptionBadge}>
-              <Lock color="#34d399" size={14} style={{ marginRight: 6 }} />
-              <Text color="#34d399" fontSize={13} fontWeight="700">End-to-end Encrypted</Text>
+              <Lock color={TOKENS.COLORS.SUCCESS} size={14} style={{ marginRight: 6 }} />
+              <Text color={TOKENS.COLORS.SUCCESS} fontSize={13} fontWeight="700">End-to-end Encrypted</Text>
             </View>
           </YStack>
           <View style={{ width: 44 }} /> 
@@ -311,7 +311,7 @@ export default function CallScreen() {
                 <Image source={{ uri: contactAvatar }} style={{ width: 120, height: 120, borderRadius: 60, resizeMode: 'cover' }} />
               ) : (
                 <View style={{ flex: 1, width: '100%', height: '100%', justifyContent: 'center', alignItems: 'center' }}>
-                  <LinearGradient colors={['#3b82f6', '#8b5cf6']} style={StyleSheet.absoluteFillObject} />
+                  <LinearGradient colors={TOKENS.GRADIENTS.PRIMARY} style={StyleSheet.absoluteFillObject} />
                   <Text color="#fff" fontSize={48} fontWeight="bold" zIndex={1}>
                     {contactName.charAt(0).toUpperCase()}
                   </Text>
@@ -343,12 +343,12 @@ export default function CallScreen() {
 
         {lastTranslatedSpeech ? (
           <Animated.View key={lastTranslatedSpeech} entering={SlideInUp.springify().damping(15)} style={styles.subtitleContainer}>
-            <View style={[StyleSheet.absoluteFillObject, { borderRadius: 20, overflow: 'hidden' }]} pointerEvents="none">
+            <View style={[StyleSheet.absoluteFillObject, { borderRadius: TOKENS.RADIUS.LG, overflow: 'hidden' }]} pointerEvents="none">
               <LinearGradient colors={['rgba(15,23,42,0.6)', 'rgba(30,58,138,0.6)']} style={StyleSheet.absoluteFillObject} />
             </View>
             <XStack space="$2" alignItems="center" marginBottom={8} zIndex={1}>
-              <Sparkles color="#34d399" size={12} />
-              <Text color="#34d399" fontSize={11} fontWeight="700" letterSpacing={0.5}>AI TRANSLATED</Text>
+              <Sparkles color={TOKENS.COLORS.SUCCESS} size={12} />
+              <Text color={TOKENS.COLORS.SUCCESS} fontSize={11} fontWeight="700" letterSpacing={0.5}>AI TRANSLATED</Text>
             </XStack>
             <Text color="#fff" fontSize={18} textAlign="left" fontWeight="500" lineHeight={26} zIndex={1}>
               {lastTranslatedSpeech}
@@ -426,7 +426,7 @@ const BackgroundWash = () => {
   const animatedStyle = useAnimatedStyle(() => ({ opacity: opacity.value }));
   return (
     <Animated.View style={[StyleSheet.absoluteFillObject, animatedStyle]} pointerEvents="none">
-      <LinearGradient colors={['#312e81', '#6d28d9', '#0f172a']} start={{x:0, y:0}} end={{x:1, y:1}} style={StyleSheet.absoluteFillObject} />
+      <LinearGradient colors={TOKENS.GRADIENTS.PRIMARY_DARK} start={{x:0, y:0}} end={{x:1, y:1}} style={StyleSheet.absoluteFillObject} />
     </Animated.View>
   );
 };
@@ -462,19 +462,19 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#000' },
   backgroundImage: { flex: 1, width: '100%', height: '100%' },
   darkOverlay: { ...StyleSheet.absoluteFillObject, backgroundColor: 'rgba(0, 0, 0, 0.7)' },
-  headerButton: { width: 44, height: 44, borderRadius: 22, backgroundColor: 'rgba(255,255,255,0.15)', justifyContent: 'center', alignItems: 'center', shadowColor: '#000', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.2, shadowRadius: 10, elevation: 4 },
-  encryptionBadge: { flexDirection: 'row', alignItems: 'center', backgroundColor: 'rgba(255,255,255,0.15)', paddingHorizontal: 12, paddingVertical: 6, borderRadius: 16, borderWidth: 1, borderColor: 'rgba(255,255,255,0.2)' },
+  headerButton: { width: 44, height: 44, borderRadius: TOKENS.RADIUS.LG, backgroundColor: 'rgba(255,255,255,0.15)', justifyContent: 'center', alignItems: 'center', shadowColor: '#000', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.2, shadowRadius: 10, elevation: 4 },
+  encryptionBadge: { flexDirection: 'row', alignItems: 'center', backgroundColor: 'rgba(255,255,255,0.15)', paddingHorizontal: 12, paddingVertical: 6, borderRadius: TOKENS.RADIUS.MD, borderWidth: 1, borderColor: 'rgba(255,255,255,0.2)' },
   avatarContainer: { width: 120, height: 120, justifyContent: 'center', alignItems: 'center', marginBottom: 20, position: 'relative' },
   nameText: { color: '#fff', fontSize: 32, fontWeight: '700', letterSpacing: 0.5 },
   phoneText: { color: 'rgba(255,255,255,0.7)', fontSize: 18, marginTop: 4 },
   statusText: { color: 'rgba(255,255,255,0.9)', fontSize: 20, fontWeight: '400', marginTop: 12 },
   statusTextActive: { color: '#10b981', fontWeight: 'bold' },
-  subtitleContainer: { marginTop: 20, paddingHorizontal: 20, paddingVertical: 16, borderRadius: 20, borderWidth: 1, borderColor: 'rgba(139, 92, 246, 0.4)', shadowColor: '#8b5cf6', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.3, shadowRadius: 10, elevation: 5 },
+  subtitleContainer: { marginTop: 20, paddingHorizontal: 20, paddingVertical: 16, borderRadius: TOKENS.RADIUS.LG, borderWidth: 1, borderColor: 'rgba(139, 92, 246, 0.4)', shadowColor: '#8b5cf6', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.3, shadowRadius: 10, elevation: 5 },
   controlsWrapper: { width: '100%', paddingHorizontal: 30 },
   bottomControls: { width: '100%', paddingHorizontal: 30 },
-  glassButton: { width: 64, height: 64, borderRadius: 32, justifyContent: 'center', alignItems: 'center', borderWidth: 1, borderColor: 'rgba(255,255,255,0.2)' },
+  glassButton: { width: 64, height: 64, borderRadius: TOKENS.RADIUS.XL, justifyContent: 'center', alignItems: 'center', borderWidth: 1, borderColor: 'rgba(255,255,255,0.2)' },
   endCallButton: { width: 72, height: 72, borderRadius: 36, backgroundColor: '#ef4444', justifyContent: 'center', alignItems: 'center', shadowColor: '#ef4444', shadowOffset: { width: 0, height: 0 }, shadowOpacity: 0.8, shadowRadius: 15, elevation: 10 },
-  translationPill: { flexDirection: 'row', alignItems: 'center', gap: 8, backgroundColor: 'rgba(255,255,255,0.9)', paddingHorizontal: 20, paddingVertical: 12, borderRadius: 30 },
+  translationPill: { flexDirection: 'row', alignItems: 'center', gap: 8, backgroundColor: 'rgba(255,255,255,0.9)', paddingHorizontal: 20, paddingVertical: 12, borderRadius: TOKENS.RADIUS.XL },
   translationPillActive: { backgroundColor: '#005eb8' }
 });
 
@@ -484,7 +484,7 @@ export function ErrorBoundary({ error, retry }: any) {
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#000', padding: 20 }}>
       <Text style={{ color: 'red', fontSize: 18, marginBottom: 10 }}>Call Screen Error</Text>
       <Text style={{ color: 'white', textAlign: 'center' }}>{error?.message || 'Unknown error occurred'}</Text>
-      <TouchableOpacity onPress={retry} style={{ marginTop: 20, padding: 10, backgroundColor: '#333', borderRadius: 8 }}>
+      <TouchableOpacity onPress={retry} style={{ marginTop: 20, padding: 10, backgroundColor: '#333', borderRadius: TOKENS.RADIUS.SM }}>
         <Text style={{ color: 'white' }}>Retry</Text>
       </TouchableOpacity>
     </View>

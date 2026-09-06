@@ -8,7 +8,7 @@ import { Search, Edit, Archive, Trash2, MessageSquare, Image as ImageIcon, Mic, 
 import { useRouter, useFocusEffect } from 'expo-router';
 import { useAuth } from '../../src/context/AuthContext';
 import { decryptMessage } from '../../src/utils/cryptoUtils';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Swipeable } from 'react-native-gesture-handler';
 import { api } from '../../src/services/api';
 import Animated, { FadeInDown, FadeInUp, useSharedValue, useAnimatedStyle, withSpring, withRepeat, withTiming } from 'react-native-reanimated';
@@ -120,7 +120,7 @@ const SkeletonRow = ({ index }: { index: number }) => {
           </Animated.View>
        </View>
        <YStack flex={1} marginLeft="$3" space="$2" justifyContent="center">
-         <View style={{width: '40%', height: 16, backgroundColor: '#e2e8f0', borderRadius: 8, overflow: 'hidden'}}>
+         <View style={{width: '40%', height: 16, backgroundColor: '#e2e8f0', borderRadius: TOKENS.RADIUS.SM, overflow: 'hidden'}}>
             <Animated.View style={[StyleSheet.absoluteFillObject, style, { width: 200, left: -100 }]}>
               <LinearGradient colors={['transparent', 'rgba(255,255,255,0.6)', 'transparent']} start={{x:0, y:0}} end={{x:1, y:0}} style={StyleSheet.absoluteFillObject} />
             </Animated.View>
@@ -136,6 +136,7 @@ const SkeletonRow = ({ index }: { index: number }) => {
 };
 
 export default function MessagesScreen() {
+  const insets = useSafeAreaInsets();
   const router = useRouter();
   const { user } = useAuth();
   const [conversations, setConversations] = useState<any[]>([]);
@@ -164,13 +165,13 @@ export default function MessagesScreen() {
     return (
       <View style={styles.swipeActionsContainer}>
         <TouchableOpacity style={styles.swipeActionBtn} onPress={() => {}}>
-           <LinearGradient colors={['#f59e0b', '#f97316']} start={{x:0, y:0}} end={{x:1, y:1}} style={StyleSheet.absoluteFillObject} />
+           <LinearGradient colors={TOKENS.GRADIENTS.GOLD} start={{x:0, y:0}} end={{x:1, y:1}} style={StyleSheet.absoluteFillObject} />
            <RNAnimated.View style={{ transform: [{ scale }], zIndex: 1 }}>
              <Archive color="#fff" size={22} />
            </RNAnimated.View>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => deleteChat(id)} style={[styles.swipeActionBtn, styles.swipeActionBtnRight]}>
-           <LinearGradient colors={['#ef4444', '#dc2626']} start={{x:0, y:0}} end={{x:1, y:1}} style={StyleSheet.absoluteFillObject} />
+           <LinearGradient colors={TOKENS.GRADIENTS.DANGER} start={{x:0, y:0}} end={{x:1, y:1}} style={StyleSheet.absoluteFillObject} />
            <RNAnimated.View style={{ transform: [{ scale }], zIndex: 1 }}>
              <Trash2 color="#fff" size={22} />
            </RNAnimated.View>
@@ -233,7 +234,7 @@ export default function MessagesScreen() {
   if (loading) {
     return (
       <View style={styles.container}>
-        <LinearGradient colors={['#f4f8ff', '#f8f5ff']} style={StyleSheet.absoluteFillObject} />
+        <LinearGradient colors={TOKENS.GRADIENTS.SCREEN_BG} style={StyleSheet.absoluteFillObject} />
         <SafeAreaView style={{ flex: 1 }}>
           <View style={styles.header}>
             <Text style={styles.appTitle}>UniCom</Text>
@@ -251,7 +252,7 @@ export default function MessagesScreen() {
 
   return (
     <View style={styles.container}>
-      <LinearGradient colors={['#f4f8ff', '#f8f5ff']} style={StyleSheet.absoluteFillObject} />
+      <LinearGradient colors={TOKENS.GRADIENTS.SCREEN_BG} style={StyleSheet.absoluteFillObject} />
       <SafeAreaView style={{ flex: 1 }}>
         {/* Header */}
         <Animated.View entering={FadeInDown.duration(400)}>
@@ -259,7 +260,7 @@ export default function MessagesScreen() {
             <Text style={styles.appTitle}>UniCom</Text>
             <ScaleButton onPress={() => console.log('Edit pressed')} style={styles.headerIconBtnShadow}>
               <View style={styles.headerIconBtn}>
-                <LinearGradient colors={['#005eb8', '#6366f1']} start={{x:0, y:0}} end={{x:1, y:1}} style={StyleSheet.absoluteFillObject} />
+                <LinearGradient colors={TOKENS.GRADIENTS.PRIMARY} start={{x:0, y:0}} end={{x:1, y:1}} style={StyleSheet.absoluteFillObject} />
                 <Edit color="#fff" size={20} style={{ zIndex: 1 }} />
               </View>
             </ScaleButton>
@@ -281,7 +282,7 @@ export default function MessagesScreen() {
               {search.length > 0 && (
                 <Animated.View entering={FadeInDown.duration(200)}>
                   <TouchableOpacity onPress={() => setSearch('')} style={styles.clearBtn} activeOpacity={0.6}>
-                    <X color="#64748b" size={16} />
+                    <X color={TOKENS.COLORS.TEXT_SECONDARY} size={16} />
                   </TouchableOpacity>
                 </Animated.View>
               )}
@@ -292,10 +293,10 @@ export default function MessagesScreen() {
         {filtered.length === 0 ? (
           <Animated.View entering={FadeInUp.delay(200)} style={styles.emptyState}>
             <EmptyPulseIcon isSearch={!!search} />
-            <Text fontSize={22} fontWeight="800" color="#0f172a" marginTop="$5">
+            <Text fontSize={22} fontWeight="800" color={TOKENS.COLORS.TEXT_PRIMARY} marginTop="$5">
               {search ? 'No results found' : 'No messages yet'}
             </Text>
-            <Text fontSize={15} color="#64748b" marginTop="$2" textAlign="center" paddingHorizontal="$4" lineHeight={22}>
+            <Text fontSize={15} color={TOKENS.COLORS.TEXT_SECONDARY} marginTop="$2" textAlign="center" paddingHorizontal="$4" lineHeight={22}>
               {search ? `We couldn't find any chats matching "${search}"` : 'Your inbox is empty. Start a new conversation and experience seamless translation!'}
             </Text>
           </Animated.View>
@@ -303,7 +304,7 @@ export default function MessagesScreen() {
           <ScrollView
             showsVerticalScrollIndicator={false}
             refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor="#005eb8" />}
-            contentContainerStyle={{ paddingBottom: 100 }}
+            contentContainerStyle={{ paddingBottom: Math.max(insets.bottom + 120, 140) }}
           >
             {filtered.map((conv, index) => {
               const contact = conv.contact;
@@ -340,7 +341,7 @@ export default function MessagesScreen() {
                         {/* Content */}
                         <YStack flex={1} marginLeft="$3">
                           <XStack justifyContent="space-between" alignItems="center">
-                            <Text fontWeight={isUnread ? '900' : '700'} fontSize={16} color="#0f172a" numberOfLines={1} flex={1}>
+                            <Text fontWeight={isUnread ? '900' : '700'} fontSize={16} color={TOKENS.COLORS.TEXT_PRIMARY} numberOfLines={1} flex={1}>
                               {name}
                             </Text>
                             <Text fontSize={12} color={isUnread ? '#005eb8' : '#94a3b8'} fontWeight={isUnread ? '800' : '600'} marginLeft="$2">
@@ -353,7 +354,7 @@ export default function MessagesScreen() {
                             </View>
                             {isUnread && (
                               <Animated.View key={unread} entering={FadeInDown.springify()} style={styles.unreadBadgeShadow}>
-                                <LinearGradient colors={['#ef4444', '#f97316']} start={{x:0, y:0}} end={{x:1, y:1}} style={[StyleSheet.absoluteFillObject, { borderRadius: 12 }]} />
+                                <LinearGradient colors={TOKENS.GRADIENTS.DANGER} start={{x:0, y:0}} end={{x:1, y:1}} style={[StyleSheet.absoluteFillObject, { borderRadius: TOKENS.RADIUS.MD }]} />
                                 <Text color="#fff" fontSize={11} fontWeight="800" style={{ zIndex: 1 }}>{unread > 99 ? '99+' : unread}</Text>
                               </Animated.View>
                             )}
@@ -380,9 +381,9 @@ const styles = StyleSheet.create({
     shadowColor: '#005eb8', shadowOpacity: 0.15, shadowOffset: { width: 0, height: 2 }, shadowRadius: 4, elevation: 2,
   },
   headerIconBtnShadow: {
-    shadowColor: '#6366f1', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.3, shadowRadius: 8, elevation: 5, borderRadius: 20,
+    shadowColor: '#6366f1', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.3, shadowRadius: 8, elevation: 5, borderRadius: TOKENS.RADIUS.LG,
   },
-  headerIconBtn: { width: 40, height: 40, borderRadius: 20, alignItems: 'center', justifyContent: 'center', overflow: 'hidden' },
+  headerIconBtn: { width: 40, height: 40, borderRadius: TOKENS.RADIUS.LG, alignItems: 'center', justifyContent: 'center', overflow: 'hidden' },
   searchContainer: { marginHorizontal: 16, marginBottom: 16 },
   searchBar: {
     flexDirection: 'row', alignItems: 'center', backgroundColor: '#fff', 
@@ -390,30 +391,30 @@ const styles = StyleSheet.create({
     borderWidth: 1.5,
   },
   searchInput: { flex: 1, fontSize: 16, color: '#0f172a', fontWeight: '500', outlineStyle: 'none' } as any,
-  clearBtn: { width: 24, height: 24, borderRadius: 12, backgroundColor: '#f1f5f9', alignItems: 'center', justifyContent: 'center' },
+  clearBtn: { width: 24, height: 24, borderRadius: TOKENS.RADIUS.MD, backgroundColor: '#f1f5f9', alignItems: 'center', justifyContent: 'center' },
   chatRow: { 
     flexDirection: 'row', alignItems: 'center', paddingVertical: 16, paddingHorizontal: 20, 
-    backgroundColor: '#fff', marginHorizontal: 16, marginBottom: 10, borderRadius: 24,
-    shadowColor: '#64748b', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.05, shadowRadius: 10, elevation: 2,
+    backgroundColor: '#fff', marginHorizontal: 16, marginBottom: 10, borderRadius: TOKENS.RADIUS.LG,
+    ...TOKENS.SHADOWS.SUBTLE,
   },
   chatRowUnread: { backgroundColor: 'rgba(0, 94, 184, 0.035)' },
   avatarWrapper: { position: 'relative', width: 56, height: 56 },
-  avatar: { width: 56, height: 56, borderRadius: 28, borderWidth: 2, borderColor: '#fff', shadowColor: '#64748b', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.1, shadowRadius: 4, elevation: 1 },
+  avatar: { width: 56, height: 56, borderRadius: TOKENS.RADIUS.XL, borderWidth: 2, borderColor: '#fff', ...TOKENS.SHADOWS.ELEVATED },
   onlineDotWrapper: { position: 'absolute', bottom: 1, right: 1, width: 16, height: 16, justifyContent: 'center', alignItems: 'center' },
   onlineDot: { width: 14, height: 14, borderRadius: 7, backgroundColor: '#22c55e', borderWidth: 2, borderColor: '#fff' },
   onlineDotGlow: { position: 'absolute', width: 14, height: 14, borderRadius: 7, backgroundColor: '#22c55e', opacity: 0.6 },
   msgText: { fontSize: 14, color: '#64748b', fontWeight: '500', flexShrink: 1 },
   chipBase: { width: 18, height: 18, borderRadius: 9, alignItems: 'center', justifyContent: 'center' },
   unreadBadgeShadow: {
-    minWidth: 24, height: 24, borderRadius: 12, paddingHorizontal: 6, alignItems: 'center', justifyContent: 'center',
+    minWidth: 24, height: 24, borderRadius: TOKENS.RADIUS.MD, paddingHorizontal: 6, alignItems: 'center', justifyContent: 'center',
     shadowColor: '#ef4444', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.4, shadowRadius: 8, elevation: 5,
   },
   swipeActionsContainer: { 
     flexDirection: 'row', width: 140, marginBottom: 10, marginRight: 16, 
-    borderTopRightRadius: 24, borderBottomRightRadius: 24, overflow: 'hidden' 
+    borderTopRightRadius: TOKENS.RADIUS.LG, borderBottomRightRadius: TOKENS.RADIUS.LG, overflow: 'hidden' 
   },
   swipeActionBtn: { flex: 1, justifyContent: 'center', alignItems: 'center', overflow: 'hidden' },
-  swipeActionBtnRight: { borderTopRightRadius: 24, borderBottomRightRadius: 24 },
+  swipeActionBtnRight: { borderTopRightRadius: TOKENS.RADIUS.LG, borderBottomRightRadius: TOKENS.RADIUS.LG },
   emptyState: { flex: 1, justifyContent: 'center', alignItems: 'center', padding: 40, marginTop: -40 },
   emptyIconBadge: { width: 84, height: 84, borderRadius: 42, alignItems: 'center', justifyContent: 'center', overflow: 'hidden', shadowColor: '#6366f1', shadowOpacity: 0.2, shadowRadius: 16, shadowOffset: { width: 0, height: 8 }, elevation: 6 },
 });

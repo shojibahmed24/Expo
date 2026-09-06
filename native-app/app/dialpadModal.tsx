@@ -211,7 +211,7 @@ export default function DialpadModal() {
 
   return (
     <View style={styles.container}>
-      <LinearGradient colors={['#0f2f5c', '#005eb8', '#eef4ff']} locations={[0, 0.4, 0.7]} style={StyleSheet.absoluteFillObject} />
+      <LinearGradient colors={TOKENS.GRADIENTS.PRIMARY_DARK} locations={[0, 0.4, 0.7]} style={StyleSheet.absoluteFillObject} />
       
       {/* Background glow blobs (ambient color circles instead of unsupported filter:blur) */}
       <View style={styles.glowBlob1} />
@@ -258,8 +258,8 @@ export default function DialpadModal() {
               {error ? (
                 <Animated.View entering={FadeInDown.duration(200)}>
                   <XStack alignItems="center" space="$1.5">
-                    <AlertCircle color="#ef4444" size={14} />
-                    <Text color="#ef4444" fontWeight="600" fontSize={13}>{error}</Text>
+                    <AlertCircle color={TOKENS.COLORS.DANGER} size={14} />
+                    <Text color={TOKENS.COLORS.DANGER} fontWeight="600" fontSize={13}>{error}</Text>
                   </XStack>
                 </Animated.View>
               ) : null}
@@ -329,7 +329,7 @@ export default function DialpadModal() {
                       onPress={handleDelete} onLongPress={handleClearAll}
                       style={[styles.deleteBtn, delScale.animatedStyle]}
                     >
-                      <Delete color="#64748b" size={26} />
+                      <Delete color={TOKENS.COLORS.TEXT_SECONDARY} size={26} />
                     </AnimatedPressable>
                   )}
                 </View>
@@ -348,21 +348,21 @@ const styles = StyleSheet.create({
   glowBlob1: { position: 'absolute', top: -100, left: -50, width: 300, height: 300, borderRadius: 150, backgroundColor: '#38bdf8', opacity: 0.15 },
   glowBlob2: { position: 'absolute', top: 50, right: -100, width: 250, height: 250, borderRadius: 125, backgroundColor: '#818cf8', opacity: 0.1 },
   header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 20, marginBottom: 20 },
-  cancelBtn: { paddingHorizontal: 16, paddingVertical: 8, borderRadius: 20, backgroundColor: 'rgba(255,255,255,0.15)' },
+  cancelBtn: { paddingHorizontal: 16, paddingVertical: 8, borderRadius: TOKENS.RADIUS.LG, backgroundColor: 'rgba(255,255,255,0.15)' },
   cancelText: { color: '#fff', fontSize: 16, fontWeight: '600' },
   headerTitle: { fontSize: 20, fontWeight: '800', color: '#fff', letterSpacing: 0.5 },
   numberScrollContainer: { alignItems: 'center', justifyContent: 'center', minWidth: '100%', paddingHorizontal: 20 },
   digitText: { fontSize: 48, fontWeight: '700', color: '#fff', textShadowColor: 'rgba(56,189,248,0.5)', textShadowOffset: { width: 0, height: 2 }, textShadowRadius: 8, marginHorizontal: 1 },
   placeholderText: { fontSize: 36, fontWeight: '400', color: 'rgba(255,255,255,0.4)' },
   cursor: { width: 3, height: 44, backgroundColor: '#38bdf8', borderRadius: 2, marginLeft: 4 },
-  glassCard: { flex: 1, borderTopLeftRadius: 36, borderTopRightRadius: 36, shadowColor: '#005eb8', shadowOffset: { width: 0, height: -10 }, shadowOpacity: 0.15, shadowRadius: 24, elevation: 20, overflow: 'hidden', paddingBottom: Platform.OS === 'ios' ? 40 : 20 },
+  glassCard: { flex: 1, borderTopLeftRadius: 36, borderTopRightRadius: 36, ...TOKENS.SHADOWS.ELEVATED, overflow: 'hidden', paddingBottom: Platform.OS === 'ios' ? 40 : 20 },
   glassTopHighlight: { position: 'absolute', top: 0, left: 0, right: 0, height: 1.5, backgroundColor: 'rgba(255,255,255,0.8)', zIndex: 1 },
-  dialBtnWrapper: { width: 76, height: 76, borderRadius: 38, alignItems: 'center', justifyContent: 'center', overflow: 'hidden', shadowColor: '#64748b', shadowOffset: { width: 0, height: 6 }, shadowOpacity: 0.12, shadowRadius: 10, elevation: 4 },
+  dialBtnWrapper: { width: 76, height: 76, borderRadius: 38, alignItems: 'center', justifyContent: 'center', overflow: 'hidden', ...TOKENS.SHADOWS.ELEVATED },
   dialBtnGradient: { position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, borderRadius: 38 },
   dialNum: { color: '#0f172a', fontSize: 38, fontWeight: '500', lineHeight: 42, zIndex: 1 },
   dialLetters: { color: '#64748b', fontSize: 11, fontWeight: '700', letterSpacing: 1.5, zIndex: 1 },
   plusHint: { position: 'absolute', bottom: 12, color: '#64748b', fontSize: 14, fontWeight: '800', zIndex: 1 },
   callBtnWrapper: { width: 76, height: 76, borderRadius: 38, alignItems: 'center', justifyContent: 'center', overflow: 'hidden', shadowColor: '#22c55e', shadowOffset: { width: 0, height: 8 }, shadowOpacity: 0.35, shadowRadius: 16, elevation: 8 },
   callBtnGlow: { position: 'absolute', width: 76, height: 76, borderRadius: 38, backgroundColor: '#22c55e' },
-  deleteBtn: { width: 56, height: 56, borderRadius: 28, backgroundColor: '#f1f5f9', alignItems: 'center', justifyContent: 'center' },
+  deleteBtn: { width: 56, height: 56, borderRadius: TOKENS.RADIUS.XL, backgroundColor: '#f1f5f9', alignItems: 'center', justifyContent: 'center' },
 });

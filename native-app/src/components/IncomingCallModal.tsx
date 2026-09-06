@@ -43,7 +43,7 @@ export default function IncomingCallModal() {
 
           {incomingCall.isTranslated && (
             <View style={styles.aiBadge}>
-              <Text color="#059669" fontSize={12} fontWeight="bold">AI Translated Call</Text>
+              <Text color={TOKENS.COLORS.SUCCESS} fontSize={12} fontWeight="bold">AI Translated Call</Text>
             </View>
           )}
 
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width * 0.85,
     alignItems: 'center',
     padding: 30,
-    borderRadius: 20
+    borderRadius: TOKENS.RADIUS.LG
   },
   btn: {
     width: 70,
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(16,185,129,0.2)',
     paddingHorizontal: 12,
     paddingVertical: 6,
-    borderRadius: 20,
+    borderRadius: TOKENS.RADIUS.LG,
     marginBottom: 20
   }
 });

@@ -6,7 +6,7 @@ import {
 import { YStack, XStack, Text } from 'tamagui';
 import { Search, Phone, Video, UserPlus, Users, MessageSquare, Send, Quote, Settings, RefreshCw, X } from 'lucide-react-native';
 import { useRouter } from 'expo-router';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { api } from '../../src/services/api';
 import { useCall } from '../../src/context/CallContext';
 import Animated, { 
@@ -64,7 +64,7 @@ const SyncButton = ({ syncing, onPress }: { syncing: boolean, onPress: () => voi
 
   return (
     <ScaleButton onPress={onPress} style={styles.syncBtnSmall}>
-      <LinearGradient colors={['#005eb8', '#6366f1']} start={{x:0, y:0}} end={{x:1, y:1}} style={StyleSheet.absoluteFillObject} />
+      <LinearGradient colors={TOKENS.GRADIENTS.PRIMARY} start={{x:0, y:0}} end={{x:1, y:1}} style={StyleSheet.absoluteFillObject} />
       <Animated.View style={[style, { zIndex: 1 }]}>
         <RefreshCw color="#fff" size={20} />
       </Animated.View>
@@ -123,7 +123,7 @@ const SkeletonRow = ({ index }: { index: number }) => {
           </Animated.View>
        </View>
        <YStack flex={1} marginLeft="$3" space="$2" justifyContent="center">
-         <View style={{width: '40%', height: 16, backgroundColor: '#e2e8f0', borderRadius: 8, overflow: 'hidden'}}>
+         <View style={{width: '40%', height: 16, backgroundColor: '#e2e8f0', borderRadius: TOKENS.RADIUS.SM, overflow: 'hidden'}}>
             <Animated.View style={[StyleSheet.absoluteFillObject, style, { width: 200, left: -100 }]}>
               <LinearGradient colors={['transparent', 'rgba(255,255,255,0.6)', 'transparent']} start={{x:0, y:0}} end={{x:1, y:0}} style={StyleSheet.absoluteFillObject} />
             </Animated.View>
@@ -163,7 +163,7 @@ const InviteButton = ({ onInvite }: { onInvite: () => void }) => {
 
   return (
     <ScaleButton onPress={handlePress} style={styles.inviteBtnWrapper}>
-      <LinearGradient colors={['#10b981', '#14b8a6']} start={{x:0, y:0}} end={{x:1, y:1}} style={StyleSheet.absoluteFillObject} />
+      <LinearGradient colors={TOKENS.GRADIENTS.SUCCESS} start={{x:0, y:0}} end={{x:1, y:1}} style={StyleSheet.absoluteFillObject} />
       <XStack alignItems="center" space="$1.5" style={{ zIndex: 1, paddingHorizontal: 14, paddingVertical: 8 }}>
         <Animated.View style={iconStyle}>
           <Send color="#fff" size={14} />
@@ -175,6 +175,7 @@ const InviteButton = ({ onInvite }: { onInvite: () => void }) => {
 };
 
 export default function ContactsScreen() {
+  const insets = useSafeAreaInsets();
   const router = useRouter();
   const { startVoiceCall } = useCall();
   const [contacts, setContacts] = useState<any[]>([]);
@@ -283,7 +284,7 @@ export default function ContactsScreen() {
   if (loading) {
     return (
       <View style={styles.container}>
-        <LinearGradient colors={['#f4f8ff', '#f8f5ff']} style={StyleSheet.absoluteFillObject} />
+        <LinearGradient colors={TOKENS.GRADIENTS.SCREEN_BG} style={StyleSheet.absoluteFillObject} />
         <SafeAreaView style={{ flex: 1 }}>
           <View style={styles.header}>
             <Text style={styles.appTitle}>Contacts</Text>
@@ -302,7 +303,7 @@ export default function ContactsScreen() {
 
   return (
     <View style={styles.container}>
-      <LinearGradient colors={['#f4f8ff', '#f8f5ff']} style={StyleSheet.absoluteFillObject} />
+      <LinearGradient colors={TOKENS.GRADIENTS.SCREEN_BG} style={StyleSheet.absoluteFillObject} />
       <SafeAreaView style={{ flex: 1 }}>
         <Animated.View entering={FadeInDown.duration(400)}>
           <View style={styles.header}>
@@ -325,7 +326,7 @@ export default function ContactsScreen() {
               {search.length > 0 && (
                 <Animated.View entering={FadeInDown.duration(200)}>
                   <TouchableOpacity onPress={() => setSearch('')} style={styles.clearBtn} activeOpacity={0.6}>
-                    <X color="#64748b" size={16} />
+                    <X color={TOKENS.COLORS.TEXT_SECONDARY} size={16} />
                   </TouchableOpacity>
                 </Animated.View>
               )}
@@ -336,8 +337,8 @@ export default function ContactsScreen() {
         {permissionDenied && filtered.length === 0 ? (
           <Animated.View entering={FadeInUp.delay(200)} style={styles.emptyState}>
             <EmptyPulseIcon isError={true} />
-            <Text fontSize={22} fontWeight="800" color="#0f172a" marginTop="$5">Contacts Access Denied</Text>
-            <Text fontSize={15} color="#64748b" marginTop="$2" textAlign="center" paddingHorizontal="$4" lineHeight={22}>
+            <Text fontSize={22} fontWeight="800" color={TOKENS.COLORS.TEXT_PRIMARY} marginTop="$5">Contacts Access Denied</Text>
+            <Text fontSize={15} color={TOKENS.COLORS.TEXT_SECONDARY} marginTop="$2" textAlign="center" paddingHorizontal="$4" lineHeight={22}>
               Please enable contacts permission in your settings to easily find friends on UNICOM.
             </Text>
             <ScaleButton onPress={() => Linking.openSettings()} style={styles.settingsBtn}>
@@ -348,16 +349,16 @@ export default function ContactsScreen() {
         ) : filtered.length === 0 ? (
           <Animated.View entering={FadeInUp.delay(200)} style={styles.emptyState}>
             <EmptyPulseIcon isError={false} />
-            <Text fontSize={22} fontWeight="800" color="#0f172a" marginTop="$5">
+            <Text fontSize={22} fontWeight="800" color={TOKENS.COLORS.TEXT_PRIMARY} marginTop="$5">
               {search ? 'No results found' : 'No UNICOM contacts'}
             </Text>
-            <Text fontSize={15} color="#64748b" marginTop="$2" textAlign="center" paddingHorizontal="$4" lineHeight={22}>
+            <Text fontSize={15} color={TOKENS.COLORS.TEXT_SECONDARY} marginTop="$2" textAlign="center" paddingHorizontal="$4" lineHeight={22}>
               {search ? `We couldn't find any contacts matching "${search}"` : 'Your phone contacts who use UNICOM will appear here.'}
             </Text>
             {!search && (
               <ScaleButton onPress={() => loadContacts(true)} style={styles.syncPrimaryBtn}>
                 <PulseGlow />
-                <LinearGradient colors={['#005eb8', '#6366f1']} start={{x:0, y:0}} end={{x:1, y:1}} style={StyleSheet.absoluteFillObject} />
+                <LinearGradient colors={TOKENS.GRADIENTS.PRIMARY} start={{x:0, y:0}} end={{x:1, y:1}} style={StyleSheet.absoluteFillObject} />
                 <View style={{ flexDirection: 'row', alignItems: 'center', zIndex: 1 }}>
                   <UserPlus color="#fff" size={18} />
                   <Text color="#fff" fontWeight="800" marginLeft="$2">Sync Contacts</Text>
@@ -369,7 +370,7 @@ export default function ContactsScreen() {
           <ScrollView
             showsVerticalScrollIndicator={false}
             refreshControl={<RefreshControl refreshing={refreshing} onRefresh={() => loadContacts(true)} tintColor="#005eb8" />}
-            contentContainerStyle={{ paddingBottom: 100 }}
+            contentContainerStyle={{ paddingBottom: Math.max(insets.bottom + 120, 140) }}
           >
             <View style={styles.countBadgeWrapper}>
               <View style={styles.countBadge}>
@@ -407,14 +408,14 @@ export default function ContactsScreen() {
                         <Text fontWeight={isNonUnicom ? "600" : "800"} fontSize={16} color={isNonUnicom ? "#475569" : "#0f172a"}>{name}</Text>
                         
                         <XStack alignItems="center" marginTop={2} space="$1">
-                          {(!isNonUnicom && contact.about && contact.about !== contact.phone) && <Quote size={10} color="#64748b" />}
-                          <Text fontSize={13} color="#64748b" fontStyle={(!isNonUnicom && contact.about && contact.about !== contact.phone) ? 'italic' : 'normal'}>
+                          {(!isNonUnicom && contact.about && contact.about !== contact.phone) && <Quote size={10} color={TOKENS.COLORS.TEXT_SECONDARY} />}
+                          <Text fontSize={13} color={TOKENS.COLORS.TEXT_SECONDARY} fontStyle={(!isNonUnicom && contact.about && contact.about !== contact.phone) ? 'italic' : 'normal'}>
                             {contact.about || contact.phone || 'UNICOM user'}
                           </Text>
                         </XStack>
                         
                         {isNonUnicom && (
-                          <Text fontSize={11} color="#94a3b8" marginTop={1} fontWeight="500">Not on UNICOM yet</Text>
+                          <Text fontSize={11} color={TOKENS.COLORS.TEXT_SECONDARY} marginTop={1} fontWeight="500">Not on UNICOM yet</Text>
                         )}
                       </YStack>
 
@@ -426,7 +427,7 @@ export default function ContactsScreen() {
                             style={styles.chatBtnWrapper} 
                             onPress={() => router.push(`/chat/${contact.id}`)}
                           >
-                            <LinearGradient colors={['#005eb8', '#6366f1']} start={{x:0, y:0}} end={{x:1, y:1}} style={StyleSheet.absoluteFillObject} />
+                            <LinearGradient colors={TOKENS.GRADIENTS.PRIMARY} start={{x:0, y:0}} end={{x:1, y:1}} style={StyleSheet.absoluteFillObject} />
                             <View style={{ zIndex: 1 }}><MessageSquare color="#fff" size={18} /></View>
                           </ScaleButton>
                         )}
@@ -447,28 +448,28 @@ const styles = StyleSheet.create({
   container: { flex: 1 },
   header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 20, paddingTop: 16, paddingBottom: 12 },
   appTitle: { fontSize: 28, fontWeight: '900', color: '#005eb8', letterSpacing: -0.5 },
-  syncBtnSmall: { width: 40, height: 40, borderRadius: 20, alignItems: 'center', justifyContent: 'center', overflow: 'hidden', shadowColor: '#6366f1', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.3, shadowRadius: 8, elevation: 5 },
+  syncBtnSmall: { width: 40, height: 40, borderRadius: TOKENS.RADIUS.LG, alignItems: 'center', justifyContent: 'center', overflow: 'hidden', shadowColor: '#6366f1', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.3, shadowRadius: 8, elevation: 5 },
   searchContainer: { marginHorizontal: 16, marginBottom: 16 },
   searchBar: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#fff', paddingHorizontal: 16, height: 46, borderRadius: 23, gap: 10, borderWidth: 1.5 },
   searchInput: { flex: 1, fontSize: 16, color: '#0f172a', fontWeight: '500', outlineStyle: 'none' } as any,
-  clearBtn: { width: 24, height: 24, borderRadius: 12, backgroundColor: '#f1f5f9', alignItems: 'center', justifyContent: 'center' },
-  contactRow: { paddingVertical: 14, paddingHorizontal: 20, backgroundColor: '#fff', marginHorizontal: 16, marginBottom: 10, borderRadius: 24, shadowColor: '#64748b', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.05, shadowRadius: 10, elevation: 2 },
+  clearBtn: { width: 24, height: 24, borderRadius: TOKENS.RADIUS.MD, backgroundColor: '#f1f5f9', alignItems: 'center', justifyContent: 'center' },
+  contactRow: { paddingVertical: 14, paddingHorizontal: 20, backgroundColor: '#fff', marginHorizontal: 16, marginBottom: 10, borderRadius: TOKENS.RADIUS.LG, ...TOKENS.SHADOWS.SUBTLE },
   nonUnicomRow: { backgroundColor: 'rgba(251, 191, 36, 0.05)', shadowOpacity: 0.02 },
-  contactRowSkeleton: { flexDirection: 'row', alignItems: 'center', paddingVertical: 16, paddingHorizontal: 20, backgroundColor: '#fff', marginHorizontal: 16, marginBottom: 10, borderRadius: 24, shadowColor: '#64748b', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.05, shadowRadius: 10, elevation: 2 },
+  contactRowSkeleton: { flexDirection: 'row', alignItems: 'center', paddingVertical: 16, paddingHorizontal: 20, backgroundColor: '#fff', marginHorizontal: 16, marginBottom: 10, borderRadius: TOKENS.RADIUS.LG, ...TOKENS.SHADOWS.SUBTLE },
   avatarWrapper: { position: 'relative', width: 56, height: 56 },
-  avatar: { width: 56, height: 56, borderRadius: 28, borderWidth: 2, borderColor: '#fff', shadowColor: '#64748b', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.1, shadowRadius: 4, elevation: 1 },
+  avatar: { width: 56, height: 56, borderRadius: TOKENS.RADIUS.XL, borderWidth: 2, borderColor: '#fff', ...TOKENS.SHADOWS.ELEVATED },
   onlineDotWrapper: { position: 'absolute', bottom: 1, right: 1, width: 16, height: 16, justifyContent: 'center', alignItems: 'center', zIndex: 2 },
   onlineDot: { width: 14, height: 14, borderRadius: 7, backgroundColor: '#22c55e', borderWidth: 2, borderColor: '#fff' },
   onlineDotGlow: { position: 'absolute', width: 14, height: 14, borderRadius: 7, backgroundColor: '#22c55e', opacity: 0.6 },
-  chatBtnWrapper: { width: 44, height: 44, borderRadius: 22, alignItems: 'center', justifyContent: 'center', overflow: 'hidden', shadowColor: '#6366f1', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.3, shadowRadius: 8, elevation: 4 },
-  inviteBtnWrapper: { borderRadius: 20, overflow: 'hidden', shadowColor: '#10b981', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.3, shadowRadius: 8, elevation: 4 },
+  chatBtnWrapper: { width: 44, height: 44, borderRadius: TOKENS.RADIUS.LG, alignItems: 'center', justifyContent: 'center', overflow: 'hidden', shadowColor: '#6366f1', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.3, shadowRadius: 8, elevation: 4 },
+  inviteBtnWrapper: { borderRadius: TOKENS.RADIUS.LG, overflow: 'hidden', shadowColor: '#10b981', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.3, shadowRadius: 8, elevation: 4 },
   emptyState: { flex: 1, justifyContent: 'center', alignItems: 'center', padding: 40, marginTop: -40 },
   emptyIconBadge: { width: 84, height: 84, borderRadius: 42, alignItems: 'center', justifyContent: 'center', overflow: 'hidden', shadowColor: '#6366f1', shadowOpacity: 0.2, shadowRadius: 16, shadowOffset: { width: 0, height: 8 }, elevation: 6 },
-  settingsBtn: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 20, paddingVertical: 12, borderRadius: 20, borderWidth: 1.5, borderColor: '#005eb8', marginTop: 24 },
-  syncPrimaryBtn: { borderRadius: 24, overflow: 'hidden', marginTop: 24, paddingHorizontal: 24, paddingVertical: 14 },
-  syncPrimaryBtnGlow: { position: 'absolute', top: -10, left: -10, right: -10, bottom: -10, backgroundColor: '#6366f1', opacity: 0.5, borderRadius: 30 },
+  settingsBtn: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 20, paddingVertical: 12, borderRadius: TOKENS.RADIUS.LG, borderWidth: 1.5, borderColor: '#005eb8', marginTop: 24 },
+  syncPrimaryBtn: { borderRadius: TOKENS.RADIUS.LG, overflow: 'hidden', marginTop: 24, paddingHorizontal: 24, paddingVertical: 14 },
+  syncPrimaryBtnGlow: { position: 'absolute', top: -10, left: -10, right: -10, bottom: -10, backgroundColor: '#6366f1', opacity: 0.5, borderRadius: TOKENS.RADIUS.XL },
   countBadgeWrapper: { alignItems: 'center', marginBottom: 16 },
-  countBadge: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#e0f2fe', paddingHorizontal: 12, paddingVertical: 6, borderRadius: 16 },
+  countBadge: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#e0f2fe', paddingHorizontal: 12, paddingVertical: 6, borderRadius: TOKENS.RADIUS.MD },
   countBadgeDot: { width: 6, height: 6, borderRadius: 3, backgroundColor: '#0284c7', marginRight: 6 },
   countBadgeText: { fontSize: 11, color: '#0284c7', fontWeight: '800', textTransform: 'uppercase', letterSpacing: 0.5 },
 });

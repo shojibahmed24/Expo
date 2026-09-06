@@ -91,7 +91,7 @@ const LoadingSkeleton = () => {
         <Animated.View key={i} style={[animatedStyle, { flexDirection: 'row', alignItems: 'center', paddingVertical: 10 }]}>
           <View style={{ width: 52, height: 52, borderRadius: 26, backgroundColor: '#cbd5e1' }} />
           <YStack flex={1} marginLeft="$3" space="$2">
-            <View style={{ width: 140, height: 16, borderRadius: 8, backgroundColor: '#cbd5e1' }} />
+            <View style={{ width: 140, height: 16, borderRadius: TOKENS.RADIUS.SM, backgroundColor: '#cbd5e1' }} />
             <View style={{ width: 90, height: 12, borderRadius: 6, backgroundColor: '#e2e8f0' }} />
           </YStack>
           <View style={{ width: 36, height: 36, borderRadius: 18, backgroundColor: '#e2e8f0' }} />
@@ -335,7 +335,7 @@ export default function CallsScreen() {
                 {log.aiSummary && (
                   <View style={styles.aiBadge}>
                     <LinearGradient 
-                      colors={['#10b981', '#059669']} 
+                      colors={TOKENS.GRADIENTS.SUCCESS} 
                       start={{x:0,y:0}} 
                       end={{x:1,y:1}} 
                       style={StyleSheet.absoluteFillObject} 
@@ -366,7 +366,7 @@ export default function CallsScreen() {
               activeOpacity={0.8}
             >
               <LinearGradient 
-                colors={['#10b981', '#059669']} 
+                colors={TOKENS.GRADIENTS.SUCCESS} 
                 start={{x:0,y:0}} 
                 end={{x:1,y:1}} 
                 style={styles.actionBtn}
@@ -405,7 +405,7 @@ export default function CallsScreen() {
     <View style={styles.container}>
       {/* Background Gradient - richer presence at top fading to clean soft surface */}
       <LinearGradient
-        colors={['#dbeafe', '#eef2ff', '#f8fafc']}
+        colors={TOKENS.GRADIENTS.SCREEN_BG}
         locations={[0, 0.28, 0.7]}
         start={{ x: 0.2, y: 0 }}
         end={{ x: 0.8, y: 1 }}
@@ -428,7 +428,7 @@ export default function CallsScreen() {
             </XStack>
             <TouchableOpacity style={styles.searchBtnShadow} onPress={toggleSearch} activeOpacity={0.85}>
               <LinearGradient 
-                colors={['#005eb8', '#6366f1']} 
+                colors={TOKENS.GRADIENTS.PRIMARY} 
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 1 }}
                 style={styles.searchBtn}
@@ -440,7 +440,7 @@ export default function CallsScreen() {
         ) : (
           <Animated.View entering={FadeInRight} exiting={FadeOutRight} style={[styles.headerContent, { width: '100%' }]}>
             <View style={styles.searchBar}>
-              <Search color="#64748b" size={18} />
+              <Search color={TOKENS.COLORS.TEXT_SECONDARY} size={18} />
               <TextInput 
                 style={styles.searchInput}
                 placeholder="Search names or numbers..."
@@ -451,7 +451,7 @@ export default function CallsScreen() {
               />
               {searchQuery ? (
                 <TouchableOpacity onPress={() => setSearchQuery('')}>
-                  <XCircle color="#94a3b8" size={18} />
+                  <XCircle color={TOKENS.COLORS.TEXT_SECONDARY} size={18} />
                 </TouchableOpacity>
               ) : null}
             </View>
@@ -483,7 +483,7 @@ export default function CallsScreen() {
                     colors={isMissedFilter ? ['#ef4444', '#f43f5e'] : ['#005eb8', '#6366f1']}
                     start={{ x: 0, y: 0 }}
                     end={{ x: 1, y: 1 }}
-                    style={[StyleSheet.absoluteFillObject, { borderRadius: 24 }]}
+                    style={[StyleSheet.absoluteFillObject, { borderRadius: TOKENS.RADIUS.LG }]}
                   />
                 )}
                 <RNText style={[styles.filterText, isActive && styles.filterTextActive, !isActive && isMissedFilter && missedCount > 0 && { color: '#ef4444' }]}>
@@ -511,7 +511,7 @@ export default function CallsScreen() {
           <Animated.View entering={FadeInUp.duration(600).delay(200)}>
             <YStack alignItems="center" justifyContent="center" marginTop="$10" space="$4">
               <View style={styles.emptyIconContainer}>
-                <LinearGradient colors={['#dbeafe', '#e0e7ff']} style={StyleSheet.absoluteFillObject} />
+                <LinearGradient colors={TOKENS.GRADIENTS.SCREEN_BG} style={StyleSheet.absoluteFillObject} />
                 <PhoneMissed color="#6366f1" size={34} strokeWidth={2} />
               </View>
               <YStack alignItems="center" space="$1">
@@ -571,7 +571,7 @@ export default function CallsScreen() {
           onPressIn={handleFabPressIn}
           onPressOut={handleFabPressOut}
         >
-          <LinearGradient colors={['#005eb8', '#6366f1']} style={styles.fab} start={{x:0, y:0}} end={{x:1, y:1}}>
+          <LinearGradient colors={TOKENS.GRADIENTS.PRIMARY} style={styles.fab} start={{x:0, y:0}} end={{x:1, y:1}}>
             <Grid3x3 color="#fff" size={24} strokeWidth={2.3} />
           </LinearGradient>
         </AnimatedPressable>
@@ -583,13 +583,13 @@ export default function CallsScreen() {
           <TouchableOpacity style={{ flex: 1 }} onPress={() => setSelectedSummary(null)} activeOpacity={1} />
           <Animated.View entering={SlideInDown.springify().damping(15)} exiting={SlideOutDown} style={[styles.bottomSheet, { paddingBottom: Math.max(insets.bottom + 20, 24) }]}>
             
-            <LinearGradient colors={['#eef2ff', '#ffffff']} locations={[0, 0.35]} style={[StyleSheet.absoluteFillObject, { borderTopLeftRadius: 28, borderTopRightRadius: 28 }]} />
+            <LinearGradient colors={TOKENS.GRADIENTS.SCREEN_BG} locations={[0, 0.35]} style={[StyleSheet.absoluteFillObject, { borderTopLeftRadius: TOKENS.RADIUS.XL, borderTopRightRadius: TOKENS.RADIUS.XL }]} />
             
             <View style={styles.sheetHandle} />
             <XStack justifyContent="space-between" alignItems="center" marginBottom="$4" paddingHorizontal="$4" zIndex={2}>
               <XStack space="$3" alignItems="center">
                 <View style={styles.sheetSparkleBadge}>
-                  <LinearGradient colors={['#10b981', '#059669']} start={{x:0, y:0}} end={{x:1, y:1}} style={StyleSheet.absoluteFillObject} />
+                  <LinearGradient colors={TOKENS.GRADIENTS.SUCCESS} start={{x:0, y:0}} end={{x:1, y:1}} style={StyleSheet.absoluteFillObject} />
                   <Sparkles color="#fff" size={20} />
                 </View>
                 <YStack>
@@ -598,7 +598,7 @@ export default function CallsScreen() {
                 </YStack>
               </XStack>
               <TouchableOpacity onPress={() => setSelectedSummary(null)} style={styles.sheetCloseIconBtn}>
-                <X color="#64748b" size={20} strokeWidth={2.5} />
+                <X color={TOKENS.COLORS.TEXT_SECONDARY} size={20} strokeWidth={2.5} />
               </TouchableOpacity>
             </XStack>
             
@@ -663,15 +663,11 @@ const styles = StyleSheet.create({
   logoCircle: {
     width: 38,
     height: 38,
-    borderRadius: 14,
+    borderRadius: TOKENS.RADIUS.MD,
     backgroundColor: '#ffffff',
     alignItems: 'center',
     justifyContent: 'center',
-    shadowColor: '#005eb8',
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.12,
-    shadowRadius: 8,
-    elevation: 3,
+    ...TOKENS.SHADOWS.ELEVATED,
   },
   appTitle: {
     fontSize: 26,
@@ -700,14 +696,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#ffffff',
-    borderRadius: 22,
+    borderRadius: TOKENS.RADIUS.LG,
     paddingHorizontal: 16,
     height: 44,
-    shadowColor: '#005eb8',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.1,
-    shadowRadius: 12,
-    elevation: 4,
+    ...TOKENS.SHADOWS.ELEVATED,
     borderWidth: 1,
     borderColor: '#e2e8f0',
   },
@@ -735,7 +727,7 @@ const styles = StyleSheet.create({
   filterPill: {
     paddingHorizontal: 18,
     paddingVertical: 9,
-    borderRadius: 24,
+    borderRadius: TOKENS.RADIUS.LG,
     marginRight: 10,
     flexDirection: 'row',
     alignItems: 'center',
@@ -745,11 +737,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     borderWidth: 1,
     borderColor: '#e2e8f0',
-    shadowColor: '#0f172a',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.05,
-    shadowRadius: 6,
-    elevation: 2,
+    ...TOKENS.SHADOWS.SUBTLE,
   },
   filterPillActive: {
     shadowColor: '#6366f1',
@@ -788,13 +776,13 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: 20,
     height: 20,
-    borderRadius: 10,
+    borderRadius: TOKENS.RADIUS.SM,
     backgroundColor: '#ef4444',
   },
   missedBadge: {
     width: 20,
     height: 20,
-    borderRadius: 10,
+    borderRadius: TOKENS.RADIUS.SM,
     backgroundColor: '#ef4444',
     alignItems: 'center',
     justifyContent: 'center',
@@ -829,12 +817,8 @@ const styles = StyleSheet.create({
   },
   cardContainer: {
     backgroundColor: '#ffffff',
-    borderRadius: 22,
-    shadowColor: '#64748b',
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.14,
-    shadowRadius: 18,
-    elevation: 8,
+    borderRadius: TOKENS.RADIUS.LG,
+    ...TOKENS.SHADOWS.ELEVATED,
     borderWidth: 1,
     borderColor: '#f1f5f9',
     overflow: 'hidden',
@@ -850,12 +834,12 @@ const styles = StyleSheet.create({
     borderBottomColor: '#f1f5f9',
   },
   rowFirst: {
-    borderTopLeftRadius: 22,
-    borderTopRightRadius: 22,
+    borderTopLeftRadius: TOKENS.RADIUS.LG,
+    borderTopRightRadius: TOKENS.RADIUS.LG,
   },
   rowLast: {
-    borderBottomLeftRadius: 22,
-    borderBottomRightRadius: 22,
+    borderBottomLeftRadius: TOKENS.RADIUS.LG,
+    borderBottomRightRadius: TOKENS.RADIUS.LG,
     borderBottomWidth: 0,
   },
   logRowMissed: {
@@ -891,7 +875,7 @@ const styles = StyleSheet.create({
     right: -2,
     width: 20,
     height: 20,
-    borderRadius: 10,
+    borderRadius: TOKENS.RADIUS.SM,
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 2,
@@ -910,7 +894,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 7,
     paddingVertical: 2.5,
-    borderRadius: 8,
+    borderRadius: TOKENS.RADIUS.SM,
     overflow: 'hidden',
     shadowColor: '#10b981',
     shadowOffset: { width: 0, height: 2 },
@@ -961,7 +945,7 @@ const styles = StyleSheet.create({
   subtleActionBtn: {
     width: 44,
     height: 44,
-    borderRadius: 22,
+    borderRadius: TOKENS.RADIUS.LG,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'rgba(0, 94, 184, 0.05)',
@@ -1017,7 +1001,7 @@ const styles = StyleSheet.create({
   fab: {
     width: 60,
     height: 60,
-    borderRadius: 30,
+    borderRadius: TOKENS.RADIUS.XL,
     alignItems: 'center',
     justifyContent: 'center',
     shadowColor: '#6366f1',
@@ -1033,14 +1017,10 @@ const styles = StyleSheet.create({
   },
   bottomSheet: {
     backgroundColor: '#ffffff',
-    borderTopLeftRadius: 28,
-    borderTopRightRadius: 28,
+    borderTopLeftRadius: TOKENS.RADIUS.XL,
+    borderTopRightRadius: TOKENS.RADIUS.XL,
     paddingTop: 16,
-    shadowColor: '#0f172a',
-    shadowOffset: { width: 0, height: -8 },
-    shadowOpacity: 0.16,
-    shadowRadius: 24,
-    elevation: 24,
+    ...TOKENS.SHADOWS.ELEVATED,
     overflow: 'hidden',
   },
   sheetHandle: {
@@ -1055,7 +1035,7 @@ const styles = StyleSheet.create({
   sheetSparkleBadge: {
     width: 44,
     height: 44,
-    borderRadius: 16,
+    borderRadius: TOKENS.RADIUS.MD,
     alignItems: 'center',
     justifyContent: 'center',
     overflow: 'hidden',
@@ -1086,7 +1066,7 @@ const styles = StyleSheet.create({
   },
   summaryBox: {
     backgroundColor: '#f8fafc',
-    borderRadius: 16,
+    borderRadius: TOKENS.RADIUS.MD,
     padding: 16,
     borderWidth: 1,
     borderColor: '#e2e8f0',
@@ -1101,7 +1081,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginHorizontal: 16,
     paddingVertical: 15,
-    borderRadius: 16,
+    borderRadius: TOKENS.RADIUS.MD,
     alignItems: 'center',
     backgroundColor: '#005eb8',
     shadowColor: '#005eb8',

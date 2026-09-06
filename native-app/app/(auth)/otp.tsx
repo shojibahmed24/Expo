@@ -159,7 +159,7 @@ export default function OtpScreen() {
     <View style={styles.container}>
       {/* Background Gradient */}
       <LinearGradient
-        colors={['#091733', '#0f2f5c', '#005eb8', '#e8f1ff']}
+        colors={TOKENS.GRADIENTS.PRIMARY_DARK}
         locations={[0, 0.3, 0.7, 1]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
@@ -173,7 +173,7 @@ export default function OtpScreen() {
       {/* Header / Back Navigation */}
       <Animated.View entering={FadeInDown.duration(400)} style={[styles.header, { paddingTop: Math.max(insets.top, 20) }]}>
         <TouchableOpacity style={styles.backButton} onPress={handleBack}>
-          <BlurView intensity={40} tint="light" style={[StyleSheet.absoluteFillObject, { borderRadius: 22, overflow: 'hidden' }]} />
+          <BlurView intensity={40} tint="light" style={[StyleSheet.absoluteFillObject, { borderRadius: TOKENS.RADIUS.LG, overflow: 'hidden' }]} />
           <ChevronLeft color="#ffffff" size={24} />
         </TouchableOpacity>
         
@@ -328,7 +328,7 @@ const styles = StyleSheet.create({
   backButton: {
     width: 44,
     height: 44,
-    borderRadius: 22,
+    borderRadius: TOKENS.RADIUS.LG,
     justifyContent: 'center',
     alignItems: 'center',
     overflow: 'hidden',
@@ -339,7 +339,7 @@ const styles = StyleSheet.create({
   logoContainer: {
     width: 64,
     height: 64,
-    borderRadius: 32,
+    borderRadius: TOKENS.RADIUS.XL,
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 1,
@@ -368,7 +368,7 @@ const styles = StyleSheet.create({
   iconWrapper: {
     width: 48,
     height: 48,
-    borderRadius: 24,
+    borderRadius: TOKENS.RADIUS.LG,
     backgroundColor: '#ffffff',
     justifyContent: 'center',
     alignItems: 'center',
@@ -378,7 +378,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: '100%',
     height: '100%',
-    borderRadius: 24,
+    borderRadius: TOKENS.RADIUS.LG,
     backgroundColor: '#005eb8',
   },
   title: {
@@ -398,14 +398,10 @@ const styles = StyleSheet.create({
   },
   formCard: {
     backgroundColor: '#ffffff',
-    borderRadius: 28,
+    borderRadius: TOKENS.RADIUS.XL,
     padding: 24,
     paddingTop: 36,
-    shadowColor: '#005eb8',
-    shadowOffset: { width: 0, height: 20 },
-    shadowOpacity: 0.15,
-    shadowRadius: 40,
-    elevation: 12,
+    ...TOKENS.SHADOWS.ELEVATED,
   },
   cardAccent: {
     position: 'absolute',
@@ -425,7 +421,7 @@ const styles = StyleSheet.create({
   otpBoxWrapper: {
     width: 48,
     height: 56,
-    borderRadius: 14,
+    borderRadius: TOKENS.RADIUS.MD,
     backgroundColor: '#f8fafc',
   },
   otpBoxWrapperActive: {
@@ -440,7 +436,7 @@ const styles = StyleSheet.create({
     flex: 1,
     borderWidth: 1.5,
     borderColor: '#cbd5e1',
-    borderRadius: 14,
+    borderRadius: TOKENS.RADIUS.MD,
     textAlign: 'center',
     fontSize: 24,
     fontWeight: '700',
@@ -481,7 +477,7 @@ const styles = StyleSheet.create({
   },
   button: {
     height: 56,
-    borderRadius: 16,
+    borderRadius: TOKENS.RADIUS.MD,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',

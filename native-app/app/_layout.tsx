@@ -103,7 +103,7 @@ function InnerApp() {
             shadowColor="#000"
             shadowOpacity={isWeb ? 0.1 : 0}
             shadowRadius={20}
-            style={isWeb ? { marginVertical: 20, borderRadius: 30, borderWidth: 8, borderColor: isDark ? '#1e293b' : '#333', borderStyle: 'solid' } : {}}
+            style={isWeb ? { marginVertical: 20, borderRadius: TOKENS.RADIUS.XL, borderWidth: 8, borderColor: isDark ? '#1e293b' : '#333', borderStyle: 'solid' } : {}}
           >
             <AuthProvider>
               <CallProvider>

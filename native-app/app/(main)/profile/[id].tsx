@@ -209,7 +209,7 @@ export default function ProfileScreen() {
               <LinearGradient colors={['rgba(15,30,60,0.7)', 'rgba(15,30,60,0.2)', '#f8fafc']} locations={[0, 0.6, 1]} style={StyleSheet.absoluteFillObject} />
             </ImageBackground>
           ) : (
-            <LinearGradient colors={['#0f2f5c', '#005eb8', '#6366f1']} style={styles.cover}>
+            <LinearGradient colors={TOKENS.GRADIENTS.PRIMARY_DARK} style={styles.cover}>
                <LinearGradient colors={['rgba(15,30,60,0.3)', 'transparent', '#f8fafc']} locations={[0, 0.7, 1]} style={StyleSheet.absoluteFillObject} />
             </LinearGradient>
           )}
@@ -230,7 +230,7 @@ export default function ProfileScreen() {
           <Animated.View entering={ZoomIn.springify().delay(200)}>
             <TouchableOpacity onPress={() => setShowPhotoViewer(true)} activeOpacity={0.85}>
               <View style={styles.avatarRing}>
-                <LinearGradient colors={['#ffffff', '#f1f5f9']} start={{x:0,y:0}} end={{x:1,y:1}} style={[StyleSheet.absoluteFillObject, { borderRadius: (AVATAR_SIZE + 10)/2 }]} />
+                <LinearGradient colors={TOKENS.GRADIENTS.SCREEN_BG} start={{x:0,y:0}} end={{x:1,y:1}} style={[StyleSheet.absoluteFillObject, { borderRadius: (AVATAR_SIZE + 10)/2 }]} />
                 {profile?.avatar ? (
                   <Image source={{ uri: profile.avatar }} style={styles.avatar} />
                 ) : (
@@ -243,7 +243,7 @@ export default function ProfileScreen() {
           </Animated.View>
 
           <Animated.View entering={FadeInUp.delay(350)} style={{ alignItems: 'center', marginTop: 16 }}>
-            <Text fontSize={26} fontWeight="900" color="#0f172a" letterSpacing={-0.5}>{profile?.name || 'Unknown User'}</Text>
+            <Text fontSize={26} fontWeight="900" color={TOKENS.COLORS.TEXT_PRIMARY} letterSpacing={-0.5}>{profile?.name || 'Unknown User'}</Text>
             <XStack alignItems="center" space="$1.5" marginTop={6} backgroundColor="#e0f2fe" paddingHorizontal="$3" paddingVertical="$1.5" borderRadius={12}>
               <Globe color="#0284c7" size={13} />
               <Text fontSize={13} fontWeight="600" color="#0284c7">{profile?.language || 'English'}</Text>
@@ -260,7 +260,7 @@ export default function ProfileScreen() {
                   <Phone color="#0ea5e9" size={24} fill="rgba(14, 165, 233, 0.15)" />
                 </View>
               </ScaleButton>
-              <Text fontSize={13} fontWeight="700" color="#475569">Audio</Text>
+              <Text fontSize={13} fontWeight="700" color={TOKENS.COLORS.TEXT_SECONDARY}>Audio</Text>
             </YStack>
 
             <YStack alignItems="center" space="$2">
@@ -269,7 +269,7 @@ export default function ProfileScreen() {
                   <MessageSquare color="#005eb8" size={24} fill="rgba(0, 94, 184, 0.15)" />
                 </View>
               </ScaleButton>
-              <Text fontSize={13} fontWeight="700" color="#475569">Message</Text>
+              <Text fontSize={13} fontWeight="700" color={TOKENS.COLORS.TEXT_SECONDARY}>Message</Text>
             </YStack>
             
             <YStack alignItems="center" space="$2">
@@ -278,7 +278,7 @@ export default function ProfileScreen() {
                   <Video color="#8b5cf6" size={24} fill="rgba(139, 92, 246, 0.15)" />
                 </View>
               </ScaleButton>
-              <Text fontSize={13} fontWeight="700" color="#475569">Video</Text>
+              <Text fontSize={13} fontWeight="700" color={TOKENS.COLORS.TEXT_SECONDARY}>Video</Text>
             </YStack>
           </XStack>
         </Animated.View>
@@ -302,7 +302,7 @@ export default function ProfileScreen() {
           {profile?.phone && (
             <Animated.View entering={SlideInRight.delay(580).springify()}>
               <View style={styles.infoCard}>
-                <View style={styles.iconBadgeEmerald}><Phone color="#10b981" size={16} /></View>
+                <View style={styles.iconBadgeEmerald}><Phone color={TOKENS.COLORS.SUCCESS} size={16} /></View>
                 <YStack flex={1} marginLeft="$3">
                   <Text style={styles.cardLabel}>Phone</Text>
                   <Text style={styles.cardValue}>{profile.phone}</Text>
@@ -329,19 +329,19 @@ export default function ProfileScreen() {
             <Animated.View entering={SlideInRight.delay(700).springify()}>
               <TouchableOpacity onPress={() => router.push(`/call-info/${id}`)} activeOpacity={0.8} style={styles.statsCardShadow}>
                 <View style={styles.statsCard}>
-                  <LinearGradient colors={['#f0f9ff', '#e0e7ff']} start={{x:0,y:0}} end={{x:1,y:1}} style={StyleSheet.absoluteFillObject} />
+                  <LinearGradient colors={TOKENS.GRADIENTS.SCREEN_BG} start={{x:0,y:0}} end={{x:1,y:1}} style={StyleSheet.absoluteFillObject} />
                   
                   <XStack space="$3" justifyContent="space-between" marginBottom="$4">
                     <YStack flex={1} alignItems="center" backgroundColor="rgba(255,255,255,0.6)" padding="$2" borderRadius={12}>
                       <View style={[styles.iconBadgeSmall, { backgroundColor: '#dbeafe' }]}><Phone color="#0ea5e9" size={14} /></View>
                       <Text fontSize={18} fontWeight="900" color="#005eb8" marginTop="$2">{sharedCalls.length}</Text>
-                      <Text fontSize={10} color="#64748b" fontWeight="700" marginTop="$1" textAlign="center">TOTAL CALLS</Text>
+                      <Text fontSize={10} color={TOKENS.COLORS.TEXT_SECONDARY} fontWeight="700" marginTop="$1" textAlign="center">TOTAL CALLS</Text>
                     </YStack>
                     
                     <YStack flex={1} alignItems="center" backgroundColor="rgba(255,255,255,0.6)" padding="$2" borderRadius={12}>
                       <View style={[styles.iconBadgeSmall, { backgroundColor: '#e0e7ff' }]}><Clock color="#6366f1" size={14} /></View>
                       <Text fontSize={18} fontWeight="900" color="#4f46e5" marginTop="$2">{formatDuration(totalDuration)}</Text>
-                      <Text fontSize={10} color="#64748b" fontWeight="700" marginTop="$1" textAlign="center">DURATION</Text>
+                      <Text fontSize={10} color={TOKENS.COLORS.TEXT_SECONDARY} fontWeight="700" marginTop="$1" textAlign="center">DURATION</Text>
                     </YStack>
 
                     <YStack flex={1} alignItems="center" backgroundColor="rgba(255,255,255,0.6)" padding="$2" borderRadius={12}>
@@ -349,7 +349,7 @@ export default function ProfileScreen() {
                       <Text fontSize={16} fontWeight="900" color="#c026d3" marginTop="$2">
                         {lastCall ? new Date(lastCall.createdAt).toLocaleDateString([], { month: 'short', day: 'numeric' }) : '-'}
                       </Text>
-                      <Text fontSize={10} color="#64748b" fontWeight="700" marginTop="$1" textAlign="center">LAST CALL</Text>
+                      <Text fontSize={10} color={TOKENS.COLORS.TEXT_SECONDARY} fontWeight="700" marginTop="$1" textAlign="center">LAST CALL</Text>
                     </YStack>
                   </XStack>
                   
@@ -381,11 +381,11 @@ export default function ProfileScreen() {
             >
               <View style={styles.muteBtn}>
                 <View style={[styles.iconBadge, { backgroundColor: isMuted ? '#f1f5f9' : '#e0f2fe' }]}>
-                  {isMuted ? <BellOff color="#64748b" size={18} /> : <Bell color="#005eb8" size={18} />}
+                  {isMuted ? <BellOff color={TOKENS.COLORS.TEXT_SECONDARY} size={18} /> : <Bell color="#005eb8" size={18} />}
                 </View>
                 <YStack flex={1} marginLeft="$3">
-                  <Text fontWeight="700" fontSize={15} color="#0f172a">{isMuted ? 'Unmute Notifications' : 'Mute Notifications'}</Text>
-                  <Text fontSize={13} color="#64748b" marginTop={2}>{isMuted ? 'Tap to unmute' : 'Silence messages from this contact'}</Text>
+                  <Text fontWeight="700" fontSize={15} color={TOKENS.COLORS.TEXT_PRIMARY}>{isMuted ? 'Unmute Notifications' : 'Mute Notifications'}</Text>
+                  <Text fontSize={13} color={TOKENS.COLORS.TEXT_SECONDARY} marginTop={2}>{isMuted ? 'Tap to unmute' : 'Silence messages from this contact'}</Text>
                 </YStack>
                 <View style={styles.toggleTrack}>
                   <LinearGradient colors={isMuted ? ['#6366f1', '#8b5cf6'] : ['#e2e8f0', '#cbd5e1']} start={{x:0, y:0}} end={{x:1, y:0}} style={StyleSheet.absoluteFillObject} />
@@ -439,8 +439,8 @@ export default function ProfileScreen() {
               }}
             >
               <XStack alignItems="center" space="$2" justifyContent="center">
-                <Flag color="#ef4444" size={16} />
-                <Text color="#ef4444" fontWeight="700" fontSize={14}>Report User</Text>
+                <Flag color={TOKENS.COLORS.DANGER} size={16} />
+                <Text color={TOKENS.COLORS.DANGER} fontWeight="700" fontSize={14}>Report User</Text>
               </XStack>
             </TouchableOpacity>
           </Animated.View>
@@ -471,8 +471,7 @@ const styles = StyleSheet.create({
   avatarRing: {
     width: AVATAR_SIZE + 10, height: AVATAR_SIZE + 10, borderRadius: (AVATAR_SIZE + 10) / 2,
     padding: 5,
-    shadowColor: '#005eb8', shadowOffset: { width: 0, height: 10 },
-    shadowOpacity: 0.15, shadowRadius: 20, elevation: 12,
+    ...TOKENS.SHADOWS.ELEVATED,
   },
   avatar: {
     width: AVATAR_SIZE, height: AVATAR_SIZE, borderRadius: AVATAR_SIZE / 2,
@@ -499,42 +498,39 @@ const styles = StyleSheet.create({
     alignItems: 'center', justifyContent: 'center',
   },
   infoCard: {
-    backgroundColor: '#fff', borderRadius: 20, padding: 16,
+    backgroundColor: '#fff', borderRadius: TOKENS.RADIUS.LG, padding: 16,
     flexDirection: 'row', alignItems: 'center',
-    shadowColor: '#64748b', shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.08, shadowRadius: 12, elevation: 3,
+    ...TOKENS.SHADOWS.SUBTLE,
     borderWidth: 1, borderColor: '#f8fafc',
   },
-  iconBadgeBlue: { width: 40, height: 40, borderRadius: 20, backgroundColor: '#e0f2fe', alignItems: 'center', justifyContent: 'center' },
-  iconBadgeEmerald: { width: 40, height: 40, borderRadius: 20, backgroundColor: '#d1fae5', alignItems: 'center', justifyContent: 'center' },
-  iconBadgePurple: { width: 40, height: 40, borderRadius: 20, backgroundColor: '#ede9fe', alignItems: 'center', justifyContent: 'center' },
-  iconBadgeSmall: { width: 28, height: 28, borderRadius: 14, alignItems: 'center', justifyContent: 'center' },
-  iconBadge: { width: 40, height: 40, borderRadius: 20, alignItems: 'center', justifyContent: 'center' },
+  iconBadgeBlue: { width: 40, height: 40, borderRadius: TOKENS.RADIUS.LG, backgroundColor: '#e0f2fe', alignItems: 'center', justifyContent: 'center' },
+  iconBadgeEmerald: { width: 40, height: 40, borderRadius: TOKENS.RADIUS.LG, backgroundColor: '#d1fae5', alignItems: 'center', justifyContent: 'center' },
+  iconBadgePurple: { width: 40, height: 40, borderRadius: TOKENS.RADIUS.LG, backgroundColor: '#ede9fe', alignItems: 'center', justifyContent: 'center' },
+  iconBadgeSmall: { width: 28, height: 28, borderRadius: TOKENS.RADIUS.MD, alignItems: 'center', justifyContent: 'center' },
+  iconBadge: { width: 40, height: 40, borderRadius: TOKENS.RADIUS.LG, alignItems: 'center', justifyContent: 'center' },
   cardLabel: { fontSize: 12, color: '#94a3b8', fontWeight: '700', textTransform: 'uppercase', letterSpacing: 0.5 },
   cardValue: { fontSize: 16, color: '#0f172a', fontWeight: '600', marginTop: 2 },
   cardBio: { fontSize: 15, color: '#334155', fontWeight: '400', marginTop: 4, lineHeight: 22 },
   statsCardShadow: {
-    shadowColor: '#6366f1', shadowOffset: { width: 0, height: 6 },
-    shadowOpacity: 0.12, shadowRadius: 16, elevation: 5,
-    borderRadius: 20, backgroundColor: '#ffffff',
+    ...TOKENS.SHADOWS.ELEVATED,
+    borderRadius: TOKENS.RADIUS.LG, backgroundColor: '#ffffff',
   },
   statsCard: {
-    borderRadius: 20, padding: 18, overflow: 'hidden',
+    borderRadius: TOKENS.RADIUS.LG, padding: 18, overflow: 'hidden',
     borderWidth: 1, borderColor: '#e0e7ff',
   },
   seeAllText: { fontSize: 14, color: '#005eb8', fontWeight: '700' },
   muteBtnShadow: {
-    shadowColor: '#64748b', shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.08, shadowRadius: 12, elevation: 3,
-    borderRadius: 20, backgroundColor: '#ffffff',
+    ...TOKENS.SHADOWS.SUBTLE,
+    borderRadius: TOKENS.RADIUS.LG, backgroundColor: '#ffffff',
   },
   muteBtn: {
-    backgroundColor: '#fff', borderRadius: 20, padding: 16,
+    backgroundColor: '#fff', borderRadius: TOKENS.RADIUS.LG, padding: 16,
     flexDirection: 'row', alignItems: 'center',
     borderWidth: 1, borderColor: '#f8fafc',
   },
   toggleTrack: {
-    width: 50, height: 28, borderRadius: 14, overflow: 'hidden',
+    width: 50, height: 28, borderRadius: TOKENS.RADIUS.MD, overflow: 'hidden',
     justifyContent: 'center', paddingHorizontal: 3,
   },
   toggleThumb: {
@@ -547,19 +543,19 @@ const styles = StyleSheet.create({
   blockShadow: {
     shadowColor: '#ef4444', shadowOffset: { width: 0, height: 8 },
     shadowOpacity: 0.35, shadowRadius: 16, elevation: 8,
-    borderRadius: 20, backgroundColor: '#ffffff',
+    borderRadius: TOKENS.RADIUS.LG, backgroundColor: '#ffffff',
   },
   unblockShadow: {
     shadowColor: '#16a34a', shadowOffset: { width: 0, height: 8 },
     shadowOpacity: 0.35, shadowRadius: 16, elevation: 8,
-    borderRadius: 20, backgroundColor: '#ffffff',
+    borderRadius: TOKENS.RADIUS.LG, backgroundColor: '#ffffff',
   },
   dangerBtn: {
-    borderRadius: 20, padding: 18, overflow: 'hidden',
+    borderRadius: TOKENS.RADIUS.LG, padding: 18, overflow: 'hidden',
     alignItems: 'center', justifyContent: 'center',
   },
   reportBtnGhost: {
-    borderRadius: 20, padding: 16,
+    borderRadius: TOKENS.RADIUS.LG, padding: 16,
     backgroundColor: '#fef2f2',
     borderWidth: 1, borderColor: '#fecaca',
     alignItems: 'center', marginTop: 8,

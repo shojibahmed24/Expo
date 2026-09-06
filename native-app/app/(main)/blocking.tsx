@@ -57,7 +57,7 @@ export default function BlockingScreen() {
           {loading ? (
             <ActivityIndicator color="#005eb8" size="large" style={{ marginTop: 20 }} />
           ) : blockedContacts.length === 0 ? (
-            <Text color="#64748b" textAlign="center" marginTop="$4">No blocked numbers.</Text>
+            <Text color={TOKENS.COLORS.TEXT_SECONDARY} textAlign="center" marginTop="$4">No blocked numbers.</Text>
           ) : (
             <GlassCard padding="$0" overflow="hidden" marginBottom="$8">
               {blockedContacts.map((contact, index) => (

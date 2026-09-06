@@ -170,7 +170,7 @@ export default function CallInfoScreen() {
 
   if (!peerInfo) return (
     <GradientBackground style={{ flex: 1 }}>
-      <LinearGradient colors={['#f4f8ff', '#f8f5ff']} style={StyleSheet.absoluteFillObject} />
+      <LinearGradient colors={TOKENS.GRADIENTS.SCREEN_BG} style={StyleSheet.absoluteFillObject} />
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <ActivityIndicator size="large" color="#005eb8" />
         <Text color="#005eb8" fontWeight="600" marginTop="$4">Loading Call Info...</Text>
@@ -183,19 +183,19 @@ export default function CallInfoScreen() {
 
   return (
     <GradientBackground style={{ flex: 1 }}>
-      <LinearGradient colors={['#f4f8ff', '#f8f5ff']} style={StyleSheet.absoluteFillObject} />
+      <LinearGradient colors={TOKENS.GRADIENTS.SCREEN_BG} style={StyleSheet.absoluteFillObject} />
       <SafeAreaView style={{ flex: 1 }}>
         
         {/* Header */}
         <XStack padding="$4" alignItems="center" justifyContent="space-between" zIndex={10}>
           <ScaleButton onPress={() => router.back()} style={styles.iconButton}>
-            <LinearGradient colors={['rgba(255,255,255,0.9)', 'rgba(248,250,252,0.9)']} start={{x:0, y:0}} end={{x:1, y:1}} style={[StyleSheet.absoluteFillObject, { borderRadius: 22 }]} />
-            <ChevronLeft color="#0f172a" size={24} style={{ zIndex: 1 }} />
+            <LinearGradient colors={['rgba(255,255,255,0.9)', 'rgba(248,250,252,0.9)']} start={{x:0, y:0}} end={{x:1, y:1}} style={[StyleSheet.absoluteFillObject, { borderRadius: TOKENS.RADIUS.LG }]} />
+            <ChevronLeft color={TOKENS.COLORS.TEXT_PRIMARY} size={24} style={{ zIndex: 1 }} />
           </ScaleButton>
-          <Text color="#0f172a" fontSize={20} fontWeight="800">Call info</Text>
+          <Text color={TOKENS.COLORS.TEXT_PRIMARY} fontSize={20} fontWeight="800">Call info</Text>
           <ScaleButton style={styles.iconButton}>
-            <LinearGradient colors={['rgba(255,255,255,0.9)', 'rgba(248,250,252,0.9)']} start={{x:0, y:0}} end={{x:1, y:1}} style={[StyleSheet.absoluteFillObject, { borderRadius: 22 }]} />
-            <MoreVertical color="#0f172a" size={24} style={{ zIndex: 1 }} />
+            <LinearGradient colors={['rgba(255,255,255,0.9)', 'rgba(248,250,252,0.9)']} start={{x:0, y:0}} end={{x:1, y:1}} style={[StyleSheet.absoluteFillObject, { borderRadius: TOKENS.RADIUS.LG }]} />
+            <MoreVertical color={TOKENS.COLORS.TEXT_PRIMARY} size={24} style={{ zIndex: 1 }} />
           </ScaleButton>
         </XStack>
 
@@ -213,8 +213,8 @@ export default function CallInfoScreen() {
             </Animated.View>
 
             <Animated.View entering={FadeInUp.duration(500).delay(200)} style={{ alignItems: 'center', width: '100%' }}>
-              <Text fontSize={26} fontWeight="800" color="#0f172a" marginTop="$5">{peerInfo.name}</Text>
-              <Text fontSize={15} color="#64748b" fontWeight="500" marginTop="$2">{peerInfo.phone || 'No phone number'}</Text>
+              <Text fontSize={26} fontWeight="800" color={TOKENS.COLORS.TEXT_PRIMARY} marginTop="$5">{peerInfo.name}</Text>
+              <Text fontSize={15} color={TOKENS.COLORS.TEXT_SECONDARY} fontWeight="500" marginTop="$2">{peerInfo.phone || 'No phone number'}</Text>
             </Animated.View>
           </YStack>
 
@@ -223,26 +223,26 @@ export default function CallInfoScreen() {
               
               <YStack alignItems="center" space="$3">
                 <ScaleButton style={[styles.actionBtn, { shadowColor: '#0ea5e9' }]} onPress={() => router.push(`/chat/${peerInfo.id}`)}>
-                  <LinearGradient colors={['#38bdf8', '#0ea5e9']} start={{x:0, y:0}} end={{x:1, y:1}} style={[StyleSheet.absoluteFillObject, { borderRadius: 32 }]} />
+                  <LinearGradient colors={TOKENS.GRADIENTS.PRIMARY} start={{x:0, y:0}} end={{x:1, y:1}} style={[StyleSheet.absoluteFillObject, { borderRadius: TOKENS.RADIUS.XL }]} />
                   <MessageSquare color="#fff" size={24} style={{ zIndex: 1 }} />
                 </ScaleButton>
-                <Text color="#475569" fontSize={13} fontWeight="600">Message</Text>
+                <Text color={TOKENS.COLORS.TEXT_SECONDARY} fontSize={13} fontWeight="600">Message</Text>
               </YStack>
               
               <YStack alignItems="center" space="$3">
                 <ScaleButton style={[styles.actionBtn, { shadowColor: '#6366f1' }]} onPress={handleAudioCall}>
-                  <LinearGradient colors={['#818cf8', '#6366f1']} start={{x:0, y:0}} end={{x:1, y:1}} style={[StyleSheet.absoluteFillObject, { borderRadius: 32 }]} />
+                  <LinearGradient colors={TOKENS.GRADIENTS.PRIMARY} start={{x:0, y:0}} end={{x:1, y:1}} style={[StyleSheet.absoluteFillObject, { borderRadius: TOKENS.RADIUS.XL }]} />
                   <Phone color="#fff" size={24} style={{ zIndex: 1 }} />
                 </ScaleButton>
-                <Text color="#475569" fontSize={13} fontWeight="600">Audio</Text>
+                <Text color={TOKENS.COLORS.TEXT_SECONDARY} fontSize={13} fontWeight="600">Audio</Text>
               </YStack>
 
               <YStack alignItems="center" space="$3">
                 <ScaleButton style={[styles.actionBtn, { shadowColor: '#d946ef' }]} onPress={handleVideoCall}>
-                  <LinearGradient colors={['#e879f9', '#d946ef']} start={{x:0, y:0}} end={{x:1, y:1}} style={[StyleSheet.absoluteFillObject, { borderRadius: 32 }]} />
+                  <LinearGradient colors={TOKENS.GRADIENTS.AI} start={{x:0, y:0}} end={{x:1, y:1}} style={[StyleSheet.absoluteFillObject, { borderRadius: TOKENS.RADIUS.XL }]} />
                   <Video color="#fff" size={24} style={{ zIndex: 1 }} />
                 </ScaleButton>
-                <Text color="#475569" fontSize={13} fontWeight="600">Video</Text>
+                <Text color={TOKENS.COLORS.TEXT_SECONDARY} fontSize={13} fontWeight="600">Video</Text>
               </YStack>
 
             </XStack>
@@ -254,9 +254,9 @@ export default function CallInfoScreen() {
                 <View style={styles.emptyStateContainer}>
                   <View style={styles.emptyStateIconBadge}>
                     <LinearGradient colors={['#f1f5f9', '#e2e8f0']} start={{x:0, y:0}} end={{x:1, y:1}} style={[StyleSheet.absoluteFillObject, { borderRadius: 36 }]} />
-                    <PhoneOff color="#94a3b8" size={32} style={{ zIndex: 1 }} />
+                    <PhoneOff color={TOKENS.COLORS.TEXT_SECONDARY} size={32} style={{ zIndex: 1 }} />
                   </View>
-                  <Text color="#64748b" fontSize={15} fontWeight="500" marginTop="$4">No call history yet with this contact</Text>
+                  <Text color={TOKENS.COLORS.TEXT_SECONDARY} fontSize={15} fontWeight="500" marginTop="$4">No call history yet with this contact</Text>
                 </View>
               </Animated.View>
             ) : (
@@ -264,8 +264,8 @@ export default function CallInfoScreen() {
                 <Animated.View key={date} entering={SlideInRight.delay(400 + gIndex * 150).springify()}>
                   {/* Date Header */}
                   <XStack alignItems="center" space="$2" marginBottom="$3" paddingLeft="$2">
-                    <LinearGradient colors={['#005eb8', '#6366f1']} start={{x:0, y:0}} end={{x:0, y:1}} style={{ width: 4, height: 14, borderRadius: 2 }} />
-                    <Text color="#64748b" fontSize={14} fontWeight="800" letterSpacing={0.5}>{date.toUpperCase()}</Text>
+                    <LinearGradient colors={TOKENS.GRADIENTS.PRIMARY} start={{x:0, y:0}} end={{x:0, y:1}} style={{ width: 4, height: 14, borderRadius: 2 }} />
+                    <Text color={TOKENS.COLORS.TEXT_SECONDARY} fontSize={14} fontWeight="800" letterSpacing={0.5}>{date.toUpperCase()}</Text>
                   </XStack>
                   
                   {/* Card Container */}
@@ -293,10 +293,10 @@ export default function CallInfoScreen() {
                                     {type.charAt(0).toUpperCase() + type.slice(1)}
                                   </Text>
                                   <XStack alignItems="center" space="$2" marginTop={4}>
-                                    <Text color="#64748b" fontSize={13} fontWeight="500">{formatTime(log.createdAt)}</Text>
+                                    <Text color={TOKENS.COLORS.TEXT_SECONDARY} fontSize={13} fontWeight="500">{formatTime(log.createdAt)}</Text>
                                     {log.isTranslated && (
                                       <View style={styles.aiBadge}>
-                                        <LinearGradient colors={['#10b981', '#14b8a6']} start={{x:0, y:0}} end={{x:1, y:1}} style={[StyleSheet.absoluteFillObject, { borderRadius: 8 }]} />
+                                        <LinearGradient colors={TOKENS.GRADIENTS.SUCCESS} start={{x:0, y:0}} end={{x:1, y:1}} style={[StyleSheet.absoluteFillObject, { borderRadius: TOKENS.RADIUS.SM }]} />
                                         <Sparkles color="#fff" size={10} style={{ zIndex: 1, marginRight: 4 }} />
                                         <Text color="#fff" fontSize={10} fontWeight="800" style={{ zIndex: 1 }}>AI TRANSLATED</Text>
                                       </View>
@@ -305,8 +305,8 @@ export default function CallInfoScreen() {
                               </YStack>
                               
                               <YStack alignItems="flex-end">
-                                <Text color="#0f172a" fontSize={15} fontWeight="700">{formatDuration(log.durationSeconds)}</Text>
-                                {log.durationSeconds > 0 && <Text color="#94a3b8" fontSize={12} marginTop={2} fontWeight="500">~{(log.durationSeconds * 2.4).toFixed(0)} kB</Text>}
+                                <Text color={TOKENS.COLORS.TEXT_PRIMARY} fontSize={15} fontWeight="700">{formatDuration(log.durationSeconds)}</Text>
+                                {log.durationSeconds > 0 && <Text color={TOKENS.COLORS.TEXT_SECONDARY} fontSize={12} marginTop={2} fontWeight="500">~{(log.durationSeconds * 2.4).toFixed(0)} kB</Text>}
                               </YStack>
                             </XStack>
                           </TouchableHighlight>
@@ -330,14 +330,10 @@ const styles = StyleSheet.create({
   iconButton: {
     width: 44,
     height: 44,
-    borderRadius: 22,
+    borderRadius: TOKENS.RADIUS.LG,
     alignItems: 'center',
     justifyContent: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.08,
-    shadowRadius: 12,
-    elevation: 4
+    ...TOKENS.SHADOWS.SUBTLE
   },
   avatarRing: {
     width: 122,
@@ -346,17 +342,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    shadowColor: '#6366f1',
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.15,
-    shadowRadius: 24,
-    elevation: 12
+    ...TOKENS.SHADOWS.ELEVATED
   },
   avatar: { width: 110, height: 110, borderRadius: 55, backgroundColor: '#e2e8f0' },
   actionBtn: {
     width: 64,
     height: 64,
-    borderRadius: 32,
+    borderRadius: TOKENS.RADIUS.XL,
     alignItems: 'center',
     justifyContent: 'center',
     shadowColor: '#0ea5e9',
@@ -370,7 +362,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingVertical: 40,
     backgroundColor: 'rgba(255,255,255,0.6)',
-    borderRadius: 24,
+    borderRadius: TOKENS.RADIUS.LG,
     marginHorizontal: 16
   },
   emptyStateIconBadge: {
@@ -385,20 +377,16 @@ const styles = StyleSheet.create({
     shadowRadius: 8
   },
   cardShadow: {
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.04,
-    shadowRadius: 16,
-    elevation: 2,
-    borderRadius: 24
+    ...TOKENS.SHADOWS.SUBTLE,
+    borderRadius: TOKENS.RADIUS.LG
   },
   cardContainer: {
     backgroundColor: '#fff',
-    borderRadius: 24,
+    borderRadius: TOKENS.RADIUS.LG,
     overflow: 'hidden'
   },
   logRow: { padding: 16 },
   logRowBorder: { borderBottomWidth: 1, borderBottomColor: '#f1f5f9' },
   typeBadge: { width: 36, height: 36, borderRadius: 18, alignItems: 'center', justifyContent: 'center' },
-  aiBadge: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 6, paddingVertical: 2, borderRadius: 8, shadowColor: '#10b981', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.2, shadowRadius: 4, elevation: 2, marginLeft: 8 }
+  aiBadge: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 6, paddingVertical: 2, borderRadius: TOKENS.RADIUS.SM, shadowColor: '#10b981', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.2, shadowRadius: 4, elevation: 2, marginLeft: 8 }
 });

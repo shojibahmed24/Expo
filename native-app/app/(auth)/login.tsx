@@ -77,7 +77,7 @@ export default function LoginScreen() {
     <View style={styles.container}>
       {/* Deep Rich Gradient Background */}
       <LinearGradient
-        colors={['#091733', '#0f2f5c', '#005eb8', '#e8f1ff']}
+        colors={TOKENS.GRADIENTS.PRIMARY_DARK}
         locations={[0, 0.3, 0.7, 1]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
@@ -140,7 +140,7 @@ export default function LoginScreen() {
                       >
                         <RNText style={styles.flagIcon}>{selectedCountry.flag}</RNText>
                         <RNText style={styles.dialCode}>{selectedCountry.dial}</RNText>
-                        <ChevronDown size={14} color="#64748b" style={{ marginLeft: 4 }} />
+                        <ChevronDown size={14} color={TOKENS.COLORS.TEXT_SECONDARY} style={{ marginLeft: 4 }} />
                         <View style={styles.divider} />
                       </TouchableOpacity>
                       
@@ -167,7 +167,7 @@ export default function LoginScreen() {
                   >
                     <View style={styles.buttonShadow}>
                       <LinearGradient
-                        colors={['#005eb8', '#3b82f6']}
+                        colors={TOKENS.GRADIENTS.PRIMARY}
                         start={{ x: 0, y: 0 }}
                         end={{ x: 1, y: 0 }}
                         style={[styles.button, isLoading && styles.buttonDisabled]}
@@ -185,7 +185,7 @@ export default function LoginScreen() {
                   </AnimatedTouchableOpacity>
                   
                   <View style={styles.trustSection}>
-                    <Lock size={12} color="#64748b" />
+                    <Lock size={12} color={TOKENS.COLORS.TEXT_SECONDARY} />
                     <RNText style={styles.trustText}>Your number is safe and never shared</RNText>
                   </View>
                 </View>
@@ -313,13 +313,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255, 255, 255, 0.9)',
     paddingHorizontal: 12,
     paddingVertical: 6,
-    borderRadius: 20,
+    borderRadius: TOKENS.RADIUS.LG,
     marginBottom: 16,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 4,
+    ...TOKENS.SHADOWS.ELEVATED,
   },
   badgeText: {
     fontSize: 12,
@@ -339,14 +335,10 @@ const styles = StyleSheet.create({
   },
   formCard: {
     backgroundColor: '#ffffff',
-    borderRadius: 28,
+    borderRadius: TOKENS.RADIUS.XL,
     padding: 28,
     paddingTop: 36,
-    shadowColor: '#005eb8',
-    shadowOffset: { width: 0, height: 20 },
-    shadowOpacity: 0.15,
-    shadowRadius: 40,
-    elevation: 12,
+    ...TOKENS.SHADOWS.ELEVATED,
     marginBottom: 32,
   },
   cardAccent: {
@@ -373,18 +365,14 @@ const styles = StyleSheet.create({
     height: 56,
     borderWidth: 1.5,
     borderColor: '#e2e8f0',
-    borderRadius: 16,
+    borderRadius: TOKENS.RADIUS.MD,
     backgroundColor: '#f8fafc',
     overflow: 'hidden',
   },
   inputFocused: {
     borderColor: '#005eb8',
     backgroundColor: '#ffffff',
-    shadowColor: '#005eb8',
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.15,
-    shadowRadius: 8,
-    elevation: 4,
+    ...TOKENS.SHADOWS.ELEVATED,
   },
   flagChip: {
     flexDirection: 'row',
@@ -426,7 +414,7 @@ const styles = StyleSheet.create({
   },
   button: {
     height: 56,
-    borderRadius: 16,
+    borderRadius: TOKENS.RADIUS.MD,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
@@ -473,8 +461,8 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     backgroundColor: '#ffffff',
-    borderTopLeftRadius: 24,
-    borderTopRightRadius: 24,
+    borderTopLeftRadius: TOKENS.RADIUS.LG,
+    borderTopRightRadius: TOKENS.RADIUS.LG,
     maxHeight: '70%',
     paddingBottom: 24,
   },
